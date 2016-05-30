@@ -7,4 +7,6 @@ import com.ws.entity.User;
  */
 public interface UserDao {
     void createUser(User user);
+
+    User showDetail(String userId);
 }

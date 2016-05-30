@@ -4,6 +4,7 @@ import com.ws.entity.User;
 import com.ws.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -28,6 +29,14 @@ public class UserController {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("user/createSuccess");
         modelAndView.addObject("user",user);
+        return modelAndView;
+    }
+
+    @RequestMapping("/{userId}")
+    public ModelAndView showDetail(@PathVariable("userId") String userId){
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("/user/showDetail");
+        modelAndView.addObject("user",userService.showDetail(userId));
         return modelAndView;
     }
 }
