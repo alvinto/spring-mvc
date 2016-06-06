@@ -27,7 +27,7 @@ public class UserDaoImpl implements UserDao{
 
     @Override
     public User showDetail(String userId) {
-        String sql = "select user_id,user_name,credits from t_user where user_id = ? ";
+        String sql = "select * from t_user where user_id = ? ";
         final User user = new User();
         jdbcTemplate.query(sql, new Object[]{userId}, new RowCallbackHandler() {
             @Override
@@ -41,5 +41,11 @@ public class UserDaoImpl implements UserDao{
             }
         });
         return user;
+    }
+
+    @Override
+    public void deleteUser(String username) {
+        String sql = "delete from t_user where user_name = ?";
+        jdbcTemplate.update(sql,new Object[]{username});
     }
 }

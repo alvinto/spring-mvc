@@ -8,4 +8,5 @@ import com.ws.entity.User;
 public interface UserService {
     void createUser(User user);
     User showDetail(String userId);
+    void deleteUser(String username);
 }

@@ -22,4 +22,9 @@ public class UserServiceImpl implements UserService {
     public User showDetail(String userId) {
         return userDao.showDetail(userId);
     }
+
+    @Override
+    public void deleteUser(String username) {
+        userDao.deleteUser(username);
+    }
 }
