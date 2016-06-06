@@ -4,12 +4,29 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:p="http://www.springframework.org/schema/p"
        xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:util="http://www.springframework.org/schema/util"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
-            http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd">
+            http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
+            http://www.springframework.org/schema/util
+            http://www.springframework.org/schema/util/spring-util-4.0.xsd">
     <context:component-scan base-package="com.ws.web"></context:component-scan>
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"></property>
         <property name="prefix" value="/WEB-INF/views/"/>
         <property name="suffix" value=".jsp"/>
     </bean>
+
+    <!--使用HttpMessageConverter<T> 它负责将请求信息转换为一个对象（类型为T），将对象（类型为T）输出为响应信息
+    具体可使用以下方式将请求信息转化并绑定到处理方法的入参中
+    1、使用@RequestBody/@ResponseBody
+    2、使用@HttpEntity<T>/ResponseEntity<T>-->
+    <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter" p:messageConverters-ref="messageConverters"></bean>
+    <util:list id="messageConverters">
+        <bean class="org.springframework.http.converter.StringHttpMessageConverter"></bean>
+        <bean class="org.springframework.http.converter.ByteArrayHttpMessageConverter"></bean>
+        <bean class="org.springframework.http.converter.BufferedImageHttpMessageConverter"></bean>
+        <bean class="org.springframework.http.converter.ResourceHttpMessageConverter"></bean>
+        <bean class="org.springframework.http.converter.xml.SourceHttpMessageConverter"></bean>
+        <bean class="org.springframework.http.converter.xml.XmlAwareFormHttpMessageConverter"></bean>
+    </util:list>
 </beans>
